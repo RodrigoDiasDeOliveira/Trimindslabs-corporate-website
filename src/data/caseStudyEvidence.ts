@@ -158,6 +158,49 @@ const EVIDENCE_OVERRIDES: Record<string, Partial<CaseStudy>> = {
     ],
     evidence: 'Current public README explicitly classifies TLP as Functional MVP: Yes, End-to-End Demo: Yes, and Production Ready: In progress.'
   }
+  'triminds-ai-cloud-administrator': {
+    deploymentStatus: 'production',
+    evidenceSource: 'Verified Google Cloud Run deployment and manual authentication-flow validation on 2026-10-07.',
+    lastVerified: '2026-10-07',
+    subtitle: 'Authenticated multi-cloud administration control plane with real provider validation',
+    tag: 'Multi-Cloud Administration / AI Infrastructure',
+    honestScope: 'Deployed web control plane for registering and validating AWS, Azure, GCP and OCI accounts. The application only marks providers connected after real credential/account validation; provider inventory and cost/security fields remain explicit when not evaluated.',
+    whatItProves: 'Demonstrates a real authenticated Cloud Run control plane with backend session validation and provider-specific integration paths rather than a simulated cloud dashboard.',
+    context: 'The current deployment runs as a single Cloud Run service in europe-west1. Access is gated by authentication, and provider onboarding is driven by real account credentials and provider APIs.',
+    architecture: {
+      overview: 'React/Vite web application plus bundled Node/Express API, deployed as one Cloud Run container with Secret Manager-backed administrator credentials.',
+      components: [
+        'Authentication gate and backend session validation',
+        'Unified provider registration API',
+        'AWS STS identity validation',
+        'Azure Entra/ARM subscription validation',
+        'GCP runtime service identity and Resource Manager validation',
+        'OCI Identity API validation'
+      ],
+      diagramText: 'Administrator Login → Authenticated Control Plane → Provider Registration → Real Provider Identity Validation → Explicit Resource / Status Evidence'
+    },
+    realArchitectureVerification: {
+      documented: 'Multi-cloud administrator with provider registration and operational audit semantics.',
+      implemented: 'Cloud Run deployment, authenticated session flow, provider-specific validation paths for AWS/Azure/GCP/OCI, explicit UNKNOWN/NOT_EVALUATED states and no fabricated cost data.',
+      presentedOnSite: 'Updated to distinguish deployed control-plane evidence from provider connectivity that has not yet been validated for a specific account.',
+      coherenceScore: 'Verified Runtime Alignment'
+    },
+    repository: {
+      name: 'RodrigoDiasDeOliveira/Trimindslabs-Ai-cloud-Administrator',
+      isPrivate: false,
+      visibilityBadge: 'Public Repository',
+      url: 'https://github.com/RodrigoDiasDeOliveira/Trimindslabs-Ai-cloud-Administrator',
+      testSuiteStatus: 'GitHub Actions CI passed; deployment image 0.8.7 built successfully.',
+      ciCdPipeline: 'GitHub Actions validation passed for the current authentication-gate changes.',
+      adrReferences: []
+    },
+    results: [
+      { metric: 'Runtime', value: 'Cloud Run / 100%', description: 'AI Cloud Administrator 0.8.7 is serving 100% of traffic in europe-west1.' },
+      { metric: 'Authentication', value: 'Verified', description: 'Login, logout and authenticated refresh behavior were manually tested.' },
+      { metric: 'Provider onboarding', value: 'Real validation required', description: 'AWS, Azure, GCP and OCI are only marked connected after successful provider-specific validation.' }
+    ],
+    evidence: 'Verified Cloud Run deployment at https://trimindslabs-ai-cloud-administrator-678678091915.europe-west1.run.app with image 0.8.7 and a manually validated authentication gate.'
+  },
 };
 
 export const getEvidenceCaseStudies = (): CaseStudy[] => CASE_STUDIES.map((study) => {
